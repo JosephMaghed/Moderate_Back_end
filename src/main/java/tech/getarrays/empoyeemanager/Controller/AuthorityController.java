@@ -14,7 +14,7 @@ import tech.getarrays.empoyeemanager.service.SchoolService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/team")
+@RequestMapping("/authority")
 public class AuthorityController {
     public AuthorityController(AuthorityService authorityService, EmployeeService employeeService, SchoolService schoolService) {
         this.authorityService = authorityService;
@@ -31,7 +31,7 @@ public class AuthorityController {
     public ResponseEntity<Authority> addAuthority(@RequestBody Authority authority){
         Authority newAuthority;
         //Retrieve EmployeeId & add it to authority entity as a foreign key
-        if(authority.getEmployee().getId()!=null){
+        if(authority.getEmployee()!=null){
             Employee existingEmployee = employeeService.findEmployeeById(authority.getEmployee().getId());
             authority.setEmployee(existingEmployee);
         }
@@ -45,26 +45,22 @@ public class AuthorityController {
 
     }
     @GetMapping("/all")
-    public ResponseEntity<List<Authority>> getAllTeams(){
-        List<Authority> autorities = authorityService.findAllAuthorities();
-        return new ResponseEntity<>(autorities,HttpStatus.OK);
+    public ResponseEntity<List<Authority>> getAllAuthorities(){
+        List<Authority> authorities = authorityService.findAllAuthorities();
+        return new ResponseEntity<>(authorities,HttpStatus.OK);
     }
     @GetMapping("/find/{id}")
-    public ResponseEntity <Authority> getTeamById(@PathVariable("id")Long id){
+    public ResponseEntity <Authority> getAuthorityById(@PathVariable("id")Long id){
        Authority teams= authorityService.findAuthorityById(id);
         return new ResponseEntity<>(teams,HttpStatus.OK);
     }
     @PutMapping("/update/{id}")
 
-    public ResponseEntity<Authority> updateEmployee(@RequestBody Authority authority, @PathVariable("id")Long id){
+    public ResponseEntity<Authority> updateAuthority(@RequestBody Authority authority, @PathVariable("id")Long id){
         Authority existingAuthority = authorityService.findAuthorityById(id);
 
-        if(authority.getTeamLeaderId()!=null) {
-            existingAuthority.setTeamLeaderId(authority.getTeamLeaderId());
-        }
-        if(authority.getTeamRole()!=null) {
-            existingAuthority.setTeamRole(authority.getTeamRole());
-        }
+
+
         if(authority.getEmployee().getId()!=null){
             Employee existingEmployee = employeeService.findEmployeeById(authority.getEmployee().getId());
             authority.setEmployee(existingEmployee);
@@ -80,7 +76,7 @@ public class AuthorityController {
         return new ResponseEntity<>(updateAuthority, HttpStatus.OK);
     }
     @DeleteMapping("delete/{id}")
-    public ResponseEntity deleteTeam(@PathVariable("id")Long id){
+    public ResponseEntity deleteAuthority(@PathVariable("id")Long id){
        authorityService.deleteAuthority(id);
         return new ResponseEntity<>( HttpStatus.OK);
 

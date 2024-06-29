@@ -1,6 +1,7 @@
 package tech.getarrays.empoyeemanager.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tech.getarrays.empoyeemanager.exception.UserNotFoundException;
 import tech.getarrays.empoyeemanager.model.JobRole;
 import tech.getarrays.empoyeemanager.model.JobRole;
@@ -8,6 +9,7 @@ import tech.getarrays.empoyeemanager.repo.JobRoleRepo;
 import tech.getarrays.empoyeemanager.repo.TeamRepo;
 
 import java.util.List;
+@Service
 
 public class JobRoleService {
     private  final JobRoleRepo jobRoleRepo;
@@ -28,7 +30,7 @@ public class JobRoleService {
     }
 
     public JobRole findJobRoleById(Long id){
-        return jobRoleRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not fond"));}
+        return jobRoleRepo.findById(id).orElse(null);}
 
     public JobRole updateJobRole(JobRole JobRole){
         return  jobRoleRepo.save(JobRole);

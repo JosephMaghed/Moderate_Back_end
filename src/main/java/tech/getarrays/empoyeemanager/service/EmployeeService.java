@@ -6,9 +6,7 @@ import tech.getarrays.empoyeemanager.exception.UserNotFoundException;
 import tech.getarrays.empoyeemanager.model.Employee;
 import tech.getarrays.empoyeemanager.repo.EmployeeRepo;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,6 +22,7 @@ public class EmployeeService {
 
     public Employee addEmployee(Employee employee){
         employee.setEmployeeCode(UUID.randomUUID().toString());
+
         return  employeeRepo.save(employee);
     }
 

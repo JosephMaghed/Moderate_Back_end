@@ -11,13 +11,9 @@ import java.io.Serializable;
 @Entity
 @Data
 public class Employee implements Serializable {
-@Id //Primary Key
-@SequenceGenerator(name="employee_sequence",
-sequenceName = "employee_sequence",
-allocationSize = 1)
-@GeneratedValue(strategy= GenerationType.SEQUENCE,
-generator="employee_sequence")//How to generate value
-@Column(nullable = false,updatable = false)
+    @Id//primary key
+    @GeneratedValue(strategy= GenerationType.IDENTITY)//How to generate value
+    @Column(nullable = false,updatable = false)
     private Long id;
 
     @NotBlank(message = "Name can not be empty")
@@ -27,8 +23,7 @@ generator="employee_sequence")//How to generate value
     @Email(message = "Email must e in the correct format")
     private String email;
 
-    @NotBlank(message = "Job title must not be empty")
-    private String jobTitle;
+
 
     @NotBlank(message = "Please enter your phone number ")
     @Size(min = 10, message = "Please enter a valid phone number")
@@ -37,9 +32,9 @@ generator="employee_sequence")//How to generate value
     private String imageUrl;
 
 
-
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = true,updatable = true)
     private String employeeCode;
+
     //Connect to Job table
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name = "JobId")  // Name of the foreign key column

@@ -10,7 +10,7 @@ import tech.getarrays.empoyeemanager.service.EmployeeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/team")
+@RequestMapping("/school")
 public class SchoolController {
     public SchoolController(SchoolService schoolService) {
         this.schoolService = schoolService;
@@ -19,7 +19,7 @@ public class SchoolController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<School> addTeam(@RequestBody School school){
+    public ResponseEntity<School> addSchool(@RequestBody School school){
         School newschool;
         //Retrieve TeamId & add it to employee entity as a foreign key
        
@@ -28,18 +28,18 @@ public class SchoolController {
 
     }
     @GetMapping("/all")
-    public ResponseEntity<List<School>> getAllTeams(){
+    public ResponseEntity<List<School>> getAllSchools(){
         List<School> schools = schoolService.findAllSchools();
         return new ResponseEntity<>(schools,HttpStatus.OK);
     }
     @GetMapping("/find/{id}")
-    public ResponseEntity <School> getTeamById(@PathVariable("id")Long id){
+    public ResponseEntity <School> getSchoolById(@PathVariable("id")Long id){
        School schools= schoolService.findSchoolById(id);
         return new ResponseEntity<>(schools,HttpStatus.OK);
     }
     @PutMapping("/update/{id}")
 
-    public ResponseEntity<School> updateEmployee(@RequestBody School school, @PathVariable("id")Long id){
+    public ResponseEntity<School> updateSchool(@RequestBody School school, @PathVariable("id")Long id){
         School existingschool = schoolService.findSchoolById(id);
 
         if(school.getName()!=null) {
@@ -53,7 +53,7 @@ public class SchoolController {
         return new ResponseEntity<>(updateschool, HttpStatus.OK);
     }
     @DeleteMapping("delete/{id}")
-    public ResponseEntity deleteTeam(@PathVariable("id")Long id){
+    public ResponseEntity deleteSchool(@PathVariable("id")Long id){
        schoolService.deleteSchool(id);
         return new ResponseEntity<>( HttpStatus.OK);
 

@@ -31,7 +31,7 @@ public class SchoolService {
     public School updateSchool(School School){return SchoolRepo.save(School);}
 
     public School findSchoolById(Long id)
-    {return SchoolRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not fond"));}
+    {return SchoolRepo.findById(id).orElse(null);}
 
     public void deleteSchool(Long id){
         SchoolRepo.deleteById(id);

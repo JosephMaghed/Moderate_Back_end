@@ -4,11 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.getarrays.empoyeemanager.model.Employee;
-import tech.getarrays.empoyeemanager.model.Authority;
 import tech.getarrays.empoyeemanager.model.JobRole;
 import tech.getarrays.empoyeemanager.model.School;
 import tech.getarrays.empoyeemanager.service.EmployeeService;
-import tech.getarrays.empoyeemanager.service.AuthorityService;
 import tech.getarrays.empoyeemanager.service.JobRoleService;
 import tech.getarrays.empoyeemanager.service.SchoolService;
 
@@ -49,14 +47,14 @@ public class EmployeeController {
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
 
         //Retrieve JobRoleId & add it to employee entity as a foreign key
-        if(employee.getJobRole().getId()!=null){
+        if(employee.getJobRole()!=null&&employee.getJobRole().getId()!=null){
             JobRole existingJobRole = jobRoleService.findJobRoleById(employee.getJobRole().getId());
             employee.setJobRole(existingJobRole);
         }
 
         //Retrieve SchoolId & add it to employee entity as a foreign key
-        if(employee.getSchool().getId()!=null){
-            School existingSchool = schoolService.findSchoolById(employee.getJobRole().getId());
+        if(employee.getSchool()!=null&&employee.getSchool().getId()!=null){
+            School existingSchool = schoolService.findSchoolById(employee.getSchool().getId());
             employee.setSchool(existingSchool);
         }
 
@@ -83,7 +81,6 @@ public class EmployeeController {
 
     if(employee.getPhone()!=null){oldEmployee.setPhone(employee.getPhone());}
 
-    if(employee.getJobTitle()!=null){oldEmployee.setJobTitle(employee.getJobTitle());}
 
     if(employee.getImageUrl()!=null){oldEmployee.setImageUrl(employee.getImageUrl());}
         //Retrieve JobRoleId & add it to employee entity as a foreign key
@@ -93,7 +90,7 @@ public class EmployeeController {
         }
 
         //Retrieve SchoolId & add it to employee entity as a foreign key
-        if(employee.getSchool().getId()!=null){
+        if(employee.getSchool()!=null){
             School existingSchool = schoolService.findSchoolById(employee.getSchool().getId());
             employee.setSchool(existingSchool);
         }

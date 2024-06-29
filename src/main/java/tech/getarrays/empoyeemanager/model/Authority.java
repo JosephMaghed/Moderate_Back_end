@@ -12,9 +12,8 @@ public class Authority implements Serializable {
     @Column(nullable = false,updatable = false)
     private Long teamId;
 
-    private Long TeamLeaderId;
 
-    private String TeamRole;
+    private String AuthorityName;
     //Connect to Team table
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     private Employee Employee;
