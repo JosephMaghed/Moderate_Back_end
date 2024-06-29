@@ -12,6 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/school")
 public class SchoolController {
+    //Initialise & define service files
+
     public SchoolController(SchoolService schoolService) {
         this.schoolService = schoolService;
     }
@@ -41,6 +43,9 @@ public class SchoolController {
 
     public ResponseEntity<School> updateSchool(@RequestBody School school, @PathVariable("id")Long id){
         School existingschool = schoolService.findSchoolById(id);
+
+        //Check if parameters are null if not update accordingly
+
 
         if(school.getName()!=null) {
             existingschool.setName(school.getName());

@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/authority")
 public class AuthorityController {
+    //Initialise & define service files
     public AuthorityController(AuthorityService authorityService, EmployeeService employeeService, SchoolService schoolService) {
         this.authorityService = authorityService;
         this.employeeService = employeeService;
@@ -60,7 +61,7 @@ public class AuthorityController {
         Authority existingAuthority = authorityService.findAuthorityById(id);
 
 
-
+        //Check if parameters are null if not update accordingly
         if(authority.getEmployee().getId()!=null){
             Employee existingEmployee = employeeService.findEmployeeById(authority.getEmployee().getId());
             authority.setEmployee(existingEmployee);

@@ -15,6 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/jobrole")
 public class JobRoleController {
+    //Initialise & define service files
+
     public JobRoleController (AuthorityService authorityService, JobRoleService jobRoleService, EmployeeService employeeService, SchoolService schoolService) {
         this.jobRoleService = jobRoleService;
         this.schoolService = schoolService;
@@ -57,6 +59,8 @@ public class JobRoleController {
         JobRole existingJobRole = jobRoleService.findJobRoleById(id);
 
         // Update fields of existingJobRole based on jobRole received in the request
+        //Check if parameters are null if not update accordingly
+
         if (jobRole.getJobname() != null) {
             existingJobRole.setJobname(jobRole.getJobname());
         }
