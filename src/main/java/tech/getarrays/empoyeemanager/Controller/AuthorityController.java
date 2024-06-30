@@ -70,6 +70,9 @@ public class AuthorityController {
             School existingSchool = schoolService.findSchoolById(authority.getSchool().getId());
             authority.setSchool(existingSchool);
         }
+        if(authority.getAuthorityName()!=null){
+            existingAuthority.setAuthorityName(authority.getAuthorityName());
+        }
 
 
 
