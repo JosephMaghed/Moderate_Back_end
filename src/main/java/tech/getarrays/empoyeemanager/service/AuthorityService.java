@@ -4,36 +4,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.getarrays.empoyeemanager.exception.UserNotFoundException;
 import tech.getarrays.empoyeemanager.model.Authority;
-import tech.getarrays.empoyeemanager.repo.TeamRepo;
+import tech.getarrays.empoyeemanager.repo.AuthorityRepo;
 
 import java.util.List;
 
 @Service
 public class AuthorityService {
-    private  final TeamRepo teamRepo;
+    private  final AuthorityRepo authorityRepo;
 
     //Constructor
     @Autowired
-    public AuthorityService(TeamRepo teamRepo) {
-        this.teamRepo=teamRepo;
+    public AuthorityService(AuthorityRepo authorityRepo) {
+        this.authorityRepo = authorityRepo;
     }
 
     public Authority addAuthority(Authority authority){
-        return  teamRepo.save(authority);
+        return  authorityRepo.save(authority);
     }
 
     public List<Authority> findAllAuthorities(){
-        return teamRepo.findAll();
+        return authorityRepo.findAll();
     }
 
     public Authority findAuthorityById(Long id){
-        return teamRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not fond"));}
+        return authorityRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not fond"));}
 
     public Authority updateAuthority(Authority authority){
-        return  teamRepo.save(authority);
+        return  authorityRepo.save(authority);
     }
 
     public void deleteAuthority(Long id){
-         teamRepo.deleteById(id);
+         authorityRepo.deleteById(id);
     }
 }
