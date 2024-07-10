@@ -37,7 +37,7 @@ public class AuthorityController {
             authority.setEmployee(existingEmployee);
         }
         //Retrieve SchoolId & add it to authority entity as a foreign key
-        if(authority.getSchool().getId()!=null){
+        if(authority.getSchool()!=null&&authority.getSchool().getId()!=null){
             School existingSchool = schoolService.findSchoolById(authority.getSchool().getId());
             authority.setSchool(existingSchool);
         }

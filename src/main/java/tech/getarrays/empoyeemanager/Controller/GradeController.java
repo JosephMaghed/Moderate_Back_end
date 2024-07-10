@@ -67,7 +67,7 @@ public class GradeController {
     //Update fields only if they are not null
 
     if(Grade.getName()!=null){oldGrade.setName(Grade.getName());}
-        if(Grade.getOrder()!=null){oldGrade.setOrder(Grade.getOrder());}
+        if(Grade.getLevel()!=null){oldGrade.setLevel(Grade.getLevel());}
 
 
         if(Grade.getSchool().getId()!=null){

@@ -75,6 +75,8 @@ public class JobRoleController {
             // Retrieve the School entity from the database
             School existingSchool = schoolService.findSchoolById(schoolId);
 
+            existingJobRole.setSchool(existingSchool);
+
         }
 
         // Update the JobRole entity in the database

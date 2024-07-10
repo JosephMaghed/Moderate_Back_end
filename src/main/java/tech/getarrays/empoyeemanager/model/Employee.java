@@ -10,10 +10,12 @@ import java.io.Serializable;
 //Use @Entity to make sure that this class gets mapped to any database
 @Entity
 @Data
-public class Employee implements Serializable {
-    @Id//primary key
-    @GeneratedValue(strategy= GenerationType.IDENTITY)//How to generate value
-    @Column(nullable = false,updatable = false)
+public class Employee implements Serializable {  @Id //Primary Key
+@SequenceGenerator(name="employee_sequence",
+        sequenceName = "employee_sequence",
+        allocationSize = 1)
+@GeneratedValue(strategy= GenerationType.SEQUENCE,
+        generator="employee_sequence")//How to generate value
     private Long id;
 
     @NotBlank(message = "Name can not be empty")
