@@ -13,7 +13,7 @@ import tech.getarrays.empoyeemanager.service.SectionService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Section")
+@RequestMapping("/section")
 public class SectionController {
     //Initialise & define service files
     public SectionController(SectionService SectionService, GradeService gradeService, EmployeeService employeeService, SchoolService schoolService, SectionService sectionService) {
@@ -35,18 +35,18 @@ public class SectionController {
     public ResponseEntity<Section> addSection(@RequestBody Section section){
         Section newSection;
         //Retrieve EmployeeId & add it to Section entity as a foreign key
-        if(section.getEmployee()!=null){
+        if(section.getEmployee()!=null&&section.getEmployee().getId()!=null){
             Employee existingEmployee = employeeService.findEmployeeById(section.getEmployee().getId());
             section.setEmployee(existingEmployee);
         }
         //Retrieve SchoolId & add it to Section entity as a foreign key
-        if(section.getSchool().getId()!=null){
+        if(section.getSchool()!=null&&section.getSchool().getId()!=null){
             School existingSchool = schoolService.findSchoolById(section.getSchool().getId());
             section.setSchool(existingSchool);
         }
 
         //Retrieve SchoolId & add it to Section entity as a foreign key
-        if(section.getGrade().getId()!=null){
+        if(section.getGrade()!=null&&section.getGrade().getId()!=null){
             Grade existingGrade = gradeService.findGradeById(section.getGrade().getId());
             section.setGrade(existingGrade);
         }
@@ -71,18 +71,18 @@ public class SectionController {
 
 
         //Check if parameters are null if not update accordingly
-        if(section.getEmployee().getId()!=null){
+        if(section.getEmployee()!=null&&section.getEmployee().getId()!=null){
             Employee existingEmployee = employeeService.findEmployeeById(section.getEmployee().getId());
-            section.setEmployee(existingEmployee);
+            existingSection.setEmployee(existingEmployee);
         }
 
-        if(section.getGrade().getId()!=null){
+        if(section.getGrade()!=null&&section.getGrade().getId()!=null){
             Grade existingGrade = gradeService.findGradeById(section.getGrade().getId());
-            section.setGrade(existingGrade);
+            existingSection.setGrade(existingGrade);
         }
-        if(section.getSchool().getId()!=null){
+        if(section.getSchool()!=null&&section.getSchool().getId()!=null){
             School existingSchool = schoolService.findSchoolById(section.getSchool().getId());
-            section.setSchool(existingSchool);
+            existingSection.setSchool(existingSchool);
         }
         if(section.getName()!=null){
             existingSection.setName(section.getName());

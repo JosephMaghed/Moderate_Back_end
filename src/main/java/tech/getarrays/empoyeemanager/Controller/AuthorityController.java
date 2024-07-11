@@ -62,13 +62,13 @@ public class AuthorityController {
 
 
         //Check if parameters are null if not update accordingly
-        if(authority.getEmployee().getId()!=null){
+        if(authority.getEmployee()!=null&&authority.getEmployee().getId()!=null){
             Employee existingEmployee = employeeService.findEmployeeById(authority.getEmployee().getId());
-            authority.setEmployee(existingEmployee);
+            existingAuthority.setEmployee(existingEmployee);
         }
-        if(authority.getSchool().getId()!=null){
+        if(authority.getSchool()!=null&&authority.getSchool().getId()!=null){
             School existingSchool = schoolService.findSchoolById(authority.getSchool().getId());
-            authority.setSchool(existingSchool);
+            existingAuthority.setSchool(existingSchool);
         }
         if(authority.getAuthorityName()!=null){
             existingAuthority.setAuthorityName(authority.getAuthorityName());

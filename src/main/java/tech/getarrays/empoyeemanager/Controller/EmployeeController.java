@@ -86,15 +86,15 @@ public class EmployeeController {
 
     if(employee.getImageUrl()!=null){oldEmployee.setImageUrl(employee.getImageUrl());}
         //Retrieve JobRoleId & add it to employee entity as a foreign key
-        if(employee.getJobRole().getId()!=null){
+        if(employee.getJobRole()!=null&&employee.getJobRole().getId()!=null){
             JobRole existingJobRole = jobRoleService.findJobRoleById(employee.getJobRole().getId());
-            employee.setJobRole(existingJobRole);
+            oldEmployee.setJobRole(existingJobRole);
         }
 
         //Retrieve SchoolId & add it to employee entity as a foreign key
-        if(employee.getSchool()!=null){
+        if(employee.getSchool()!=null&&employee.getSchool().getId()!=null){
             School existingSchool = schoolService.findSchoolById(employee.getSchool().getId());
-            employee.setSchool(existingSchool);
+            oldEmployee.setSchool(existingSchool);
         }
 //Check if team ID is not null if true retrieve team by team id & add it as a foreign key to employee
 
