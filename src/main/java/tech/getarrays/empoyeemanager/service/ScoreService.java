@@ -27,7 +27,7 @@ public class ScoreService {
     }
 
     public Score findScoreById(Long id){
-        return ScoreRepoRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not fond"));}
+        return ScoreRepoRepo.findById(id).orElse(null);}
 
     public Score updateScore(Score Score){
         return  ScoreRepoRepo.save(Score);

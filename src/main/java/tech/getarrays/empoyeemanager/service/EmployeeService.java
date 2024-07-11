@@ -33,7 +33,7 @@ public class EmployeeService {
     public Employee updateEmployee(Employee employee){return employeeRepo.save(employee);}
 
     public Employee findEmployeeById(Long id)
-    {return employeeRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not fond"));}
+    {return employeeRepo.findById(id).orElse(null);}
 
     public void deleteEmployee(Long id){
         employeeRepo.deleteById(id);

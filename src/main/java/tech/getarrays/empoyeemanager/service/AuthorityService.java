@@ -27,7 +27,7 @@ public class AuthorityService {
     }
 
     public Authority findAuthorityById(Long id){
-        return authorityRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not fond"));}
+        return authorityRepo.findById(id).orElse(null);}
 
     public Authority updateAuthority(Authority authority){
         return  authorityRepo.save(authority);

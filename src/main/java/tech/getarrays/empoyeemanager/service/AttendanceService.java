@@ -27,7 +27,7 @@ public class AttendanceService {
     }
 
     public Attendance findAttendanceById(Long id){
-        return attendanceRepoRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not fond"));}
+        return attendanceRepoRepo.findById(id).orElse(null);}
 
     public Attendance updateAttendance(Attendance Attendance){
         return  attendanceRepoRepo.save(Attendance);
