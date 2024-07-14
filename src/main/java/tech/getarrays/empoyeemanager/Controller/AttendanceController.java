@@ -15,13 +15,11 @@ public class AttendanceController {
     //Initialise & define service files
     public AttendanceController(AttendanceService AttendanceService, AttendanceService attendanceService, StudentService studentService, SubjectService subjectService, SchoolService schoolService) {
         this.AttendanceService = AttendanceService;
-        this.attendanceService = attendanceService;
         this.studentService = studentService;
         this.subjectService = subjectService;
         this.schoolService = schoolService;
     }
     private final AttendanceService AttendanceService;
-    private final AttendanceService attendanceService;
 
     private final StudentService studentService;
     private final SubjectService subjectService;
@@ -35,18 +33,18 @@ public class AttendanceController {
         Attendance newAttendance;
 
         //Retrieve SchoolId & add it to Attendance entity as a foreign key
-        if(attendance.getSchool().getId()!=null){
+        if(attendance.getSchool()!=null&&attendance.getSchool().getId()!=null){
             School existingSchool = schoolService.findSchoolById(attendance.getSchool().getId());
             attendance.setSchool(existingSchool);
         }
 
         //Retrieve StudentId & add it to Attendance entity as a foreign key
-        if(attendance.getStudent().getId()!=null){
+        if(attendance.getStudent()!=null&&attendance.getStudent().getId()!=null){
             Student existingStudent = studentService.findStudentById(attendance.getStudent().getId());
             attendance.setStudent(existingStudent);
         }
         //Retrieve StudentId & add it to Attendance entity as a foreign key
-        if(attendance.getSubject().getId()!=null){
+        if(attendance.getSubject()!=null&&attendance.getSubject().getId()!=null){
             Subject existingSubject = subjectService.findSubjectById(attendance.getSubject().getId());
             attendance.setSubject(existingSubject);
         }
@@ -57,8 +55,8 @@ public class AttendanceController {
     }
     @GetMapping("/all")
     public ResponseEntity<List<Attendance>> getAllAuthorities(){
-        List<Attendance> authorities = AttendanceService.findAllAuthorities();
-        return new ResponseEntity<>(authorities,HttpStatus.OK);
+        List<Attendance> attendance = AttendanceService.findAllAuthorities();
+        return new ResponseEntity<>(attendance,HttpStatus.OK);
     }
     @GetMapping("/find/{id}")
     public ResponseEntity <Attendance> getAttendanceById(@PathVariable("id")Long id){
@@ -72,17 +70,17 @@ public class AttendanceController {
 
 
         //Check if parameters are null if not update accordingly
-        if(Attendance.getSubject().getId()!=null){
+        if(Attendance.getSubject()!=null&&Attendance.getSubject().getId()!=null){
             Subject existingSubject = subjectService.findSubjectById(Attendance.getSubject().getId());
-            Attendance.setSubject(existingSubject);
+            existingAttendance.setSubject(existingSubject);
         }
-        if(Attendance.getSchool().getId()!=null){
+        if(Attendance.getSchool()!=null&&Attendance.getSchool().getId()!=null){
             School existingSchool = schoolService.findSchoolById(Attendance.getSchool().getId());
-            Attendance.setSchool(existingSchool);
+            existingAttendance.setSchool(existingSchool);
         }
-        if(Attendance.getStudent().getId()!=null){
+        if(Attendance.getStudent()!=null&&Attendance.getStudent().getId()!=null){
             Student existingStudent = studentService.findStudentById(Attendance.getStudent().getId());
-            Attendance.setStudent(existingStudent);
+            existingAttendance.setStudent(existingStudent);
         }
         if(Attendance.getAttended()!=null){
             existingAttendance.setAttended(Attendance.getAttended());

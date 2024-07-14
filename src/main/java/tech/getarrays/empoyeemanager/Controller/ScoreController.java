@@ -3,31 +3,28 @@ package tech.getarrays.empoyeemanager.Controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.getarrays.empoyeemanager.model.Score;
-import tech.getarrays.empoyeemanager.model.School;
-import tech.getarrays.empoyeemanager.model.Student;
-import tech.getarrays.empoyeemanager.model.Subject;
-import tech.getarrays.empoyeemanager.service.ScoreService;
-import tech.getarrays.empoyeemanager.service.SchoolService;
-import tech.getarrays.empoyeemanager.service.StudentService;
-import tech.getarrays.empoyeemanager.service.SubjectService;
+import tech.getarrays.empoyeemanager.model.*;
+import tech.getarrays.empoyeemanager.service.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/Score")
+@RequestMapping("/score")
 public class ScoreController {
     //Initialise & define service files
-    public ScoreController(ScoreService scoreService, ScoreService ScoreService, StudentService studentService, SubjectService subjectService, SchoolService schoolService) {
+    public ScoreController(ScoreService scoreService, ScoreService ScoreService, StudentService studentService, SubjectService subjectService, SectionService sectionService, SchoolService schoolService) {
         this.ScoreService = ScoreService;
         this.studentService = studentService;
         this.subjectService = subjectService;
+        this.sectionService = sectionService;
         this.schoolService = schoolService;
     }
     private final ScoreService ScoreService;
 
     private final StudentService studentService;
     private final SubjectService subjectService;
+    private final SectionService sectionService;
+
 
     private final SchoolService schoolService;
 
@@ -38,21 +35,27 @@ public class ScoreController {
         Score newScore;
 
         //Retrieve SchoolId & add it to Score entity as a foreign key
-        if(Score.getSchool().getId()!=null){
+        if(Score.getSchool()!=null&&Score.getSchool().getId()!=null){
             School existingSchool = schoolService.findSchoolById(Score.getSchool().getId());
             Score.setSchool(existingSchool);
         }
 
         //Retrieve StudentId & add it to Score entity as a foreign key
-        if(Score.getStudent().getId()!=null){
+        if(Score.getSubject()!=null&&Score.getSubject().getId()!=null){
             Student existingStudent = studentService.findStudentById(Score.getStudent().getId());
             Score.setStudent(existingStudent);
         }
         //Retrieve StudentId & add it to Score entity as a foreign key
-        if(Score.getSubject().getId()!=null){
-            Subject existingSubject = subjectService.findSubjectById(Score.getSubject().getId());
-            Score.setSubject(existingSubject);
+        if(Score.getSection()!=null&&Score.getSection().getId()!=null){
+            Section existingSection = sectionService.findSectionById(Score.getSection().getId());
+            Score.setSection(existingSection);
         }
+        //Retrieve StudentId & add it to Score entity as a foreign key
+        if(Score.getStudent()!=null&&Score.getStudent().getId()!=null){
+            Student existingSubject = studentService.findStudentById(Score.getStudent().getId());
+            Score.setStudent(existingSubject);
+        }
+
 
         newScore = ScoreService.addScore(Score);
         return new ResponseEntity<>(newScore, HttpStatus.CREATED);
@@ -75,17 +78,17 @@ public class ScoreController {
 
 
         //Check if parameters are null if not update accordingly
-        if(Score.getSubject().getId()!=null){
+        if(Score.getSubject()!=null&&Score.getSubject().getId()!=null){
             Subject existingSubject = subjectService.findSubjectById(Score.getSubject().getId());
-            Score.setSubject(existingSubject);
+            existingScore.setSubject(existingSubject);
         }
-        if(Score.getSchool().getId()!=null){
+        if(Score.getSchool()!=null&&Score.getSchool().getId()!=null){
             School existingSchool = schoolService.findSchoolById(Score.getSchool().getId());
-            Score.setSchool(existingSchool);
+            existingScore.setSchool(existingSchool);
         }
-        if(Score.getStudent().getId()!=null){
+        if(Score.getStudent()!=null&&Score.getSchool().getId()!=null){
             Student existingStudent = studentService.findStudentById(Score.getStudent().getId());
-            Score.setStudent(existingStudent);
+            existingScore.setStudent(existingStudent);
         }
         if(Score.getStudentScore()!=null){
             existingScore.setStudentScore(Score.getStudentScore());
@@ -103,8 +106,6 @@ public class ScoreController {
         if(Score.getDate()!=null){
             existingScore.setDate(Score.getDate());
         }
-
-
 
         Score updateScore = ScoreService.updateScore(existingScore);
         return new ResponseEntity<>(updateScore, HttpStatus.OK);

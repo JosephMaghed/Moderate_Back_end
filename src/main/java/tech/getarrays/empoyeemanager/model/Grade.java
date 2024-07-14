@@ -2,6 +2,7 @@ package tech.getarrays.empoyeemanager.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -16,7 +17,7 @@ public class Grade {
     private Long id;
     @NotBlank(message = "Name can not be empty")
     private String name;
-    @NotBlank(message = "order can not be empty")
+    @NotNull(message = "order can not be empty")
     private Long level;
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)

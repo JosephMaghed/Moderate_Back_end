@@ -72,14 +72,10 @@ public class GradeController {
 
         if(Grade.getSchool().getId()!=null){
             School existingSchoolRole = schoolService.findSchoolById(Grade.getSchool().getId());
-            Grade.setSchool(existingSchoolRole);
+            oldGrade.setSchool(existingSchoolRole);
         }
 
-        //Retrieve SchoolId & add it to Grade entity as a foreign key
-        if(Grade.getSchool()!=null){
-            School existingSchool = schoolService.findSchoolById(Grade.getSchool().getId());
-            Grade.setSchool(existingSchool);
-        }
+
 //Check if team ID is not null if true retrieve team by team id & add it as a foreign key to Grade
 
      Grade updateGrade = GradeService.updateGrade(oldGrade);

@@ -12,7 +12,7 @@ import tech.getarrays.empoyeemanager.service.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Student")
+@RequestMapping("/student")
 public class StudentController {
     //Initialise & define service files
 
@@ -52,27 +52,27 @@ public class StudentController {
     //Add new Student
     @PostMapping("/add")
 
-    public ResponseEntity<Student> addStudent(@RequestBody Student Student){
+    public ResponseEntity<Student> addStudent(@RequestBody Student student){
 
         //Retrieve JobRoleId & add it to Student entity as a foreign key
-        if(Student.getSchool()!=null&&Student.getSchool().getId()!=null){
-            School existingJobRole = schoolService.findSchoolById(Student.getSchool().getId());
-            Student.setSchool(existingJobRole);
+        if(student.getSchool()!=null&&student.getSchool().getId()!=null){
+            School existingJobRole = schoolService.findSchoolById(student.getSchool().getId());
+            student.setSchool(existingJobRole);
         }
 
-        if(Student.getGrade()!=null&&Student.getGrade().getId()!=null){
-            Grade existingGrade = gradeServiceService.findGradeById(Student.getGrade().getId());
-            Student.setGrade(existingGrade);
+        if(student.getGrade()!=null&&student.getGrade().getId()!=null){
+            Grade existingGrade = gradeServiceService.findGradeById(student.getGrade().getId());
+            student.setGrade(existingGrade);
         }
 
         //Retrieve SchoolId & add it to Student entity as a foreign key
-        if(Student.getSection()!=null&&Student.getSection().getId()!=null){
-            Section existingSchool = sectionService.findSectionById(Student.getSection().getId());
-            Student.setSection(existingSchool);
+        if(student.getSection()!=null&&student.getSection().getId()!=null){
+            Section existingSchool = sectionService.findSectionById(student.getSection().getId());
+            student.setSection(existingSchool);
         }
 
 
-        Student newStudent = StudentService.addStudent(Student);
+        Student newStudent = StudentService.addStudent(student);
 
 
 
@@ -83,34 +83,35 @@ public class StudentController {
     //update a Student by id
     @PutMapping("/update/{id}")
 
-    public ResponseEntity<Student> updateStudent(@RequestBody Student Student,@PathVariable("id")Long id){
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student,@PathVariable("id")Long id){
     Student oldStudent= StudentService.findStudentById(id);
 
     //Update fields only if they are not null
 
-    if(Student.getName()!=null){oldStudent.setName(Student.getName());}
+    if(student.getName()!=null){oldStudent.setName(student.getName());}
 
-    if(Student.getEmail()!=null){oldStudent.setEmail(Student.getEmail());}
+    if(student.getEmail()!=null){oldStudent.setEmail(student.getEmail());}
 
-    if(Student.getPhone()!=null){oldStudent.setPhone(Student.getPhone());}
+    if(student.getPassword()!=null){oldStudent.setPassword(student.getPassword());}
 
         //Retrieve SchoolId & add it to Student entity as a foreign key
-        if(Student.getSection()!=null&&Student.getSection().getId()!=null){
-            Section existingSchool = sectionService.findSectionById(Student.getSection().getId());
-            Student.setSection(existingSchool);
+        if(student.getSection()!=null&&student.getSection().getId()!=null){
+            Section existingSection = sectionService.findSectionById(student.getSection().getId());
+            oldStudent.setSection(existingSection);
         }
 
         //Retrieve JobRoleId & add it to Student entity as a foreign key
-        if(Student.getSchool().getId()!=null){
-            School existingJobRole = schoolService.findSchoolById(Student.getSchool().getId());
-            Student.setSchool(existingJobRole);
+        if(student.getSchool()!=null&&student.getSchool().getId()!=null){
+            School existingSchool = schoolService.findSchoolById(student.getSchool().getId());
+            oldStudent.setSchool(existingSchool);
+        }
+        //Retrieve JobRoleId & add it to Student entity as a foreign key
+        if(student.getGrade()!=null&&student.getGrade().getId()!=null){
+            Grade existingGrade = gradeServiceService.findGradeById(student.getGrade().getId());
+            oldStudent.setGrade(existingGrade);
         }
 
-        //Retrieve SchoolId & add it to Student entity as a foreign key
-        if(Student.getSchool()!=null){
-            School existingSchool = schoolService.findSchoolById(Student.getSchool().getId());
-            Student.setSchool(existingSchool);
-        }
+
 //Check if team ID is not null if true retrieve team by team id & add it as a foreign key to Student
 
      Student updateStudent = StudentService.updateStudent(oldStudent);

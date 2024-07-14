@@ -26,7 +26,7 @@ public class Student {
 
     @NotBlank(message = "Password cannot be blank ")
     @Size(min = 8, message = "Please enter a password of min 8 characters ")
-    private String phone;
+    private String password;
 
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)

@@ -32,6 +32,10 @@ public class Attendance implements Serializable {
     @JoinColumn(name = "subjectId")  // Name of the foreign key column
 
     Subject subject;
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @JoinColumn(name = "sectionId")  // Name of the foreign key column
+
+    Section section;
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name = "studentId")  // Name of the foreign key column

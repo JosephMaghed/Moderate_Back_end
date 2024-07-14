@@ -12,7 +12,7 @@ import tech.getarrays.empoyeemanager.service.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Subject")
+@RequestMapping("/subject")
 public class SubjectController {
     //Initialise & define service files
 
@@ -95,7 +95,7 @@ public class SubjectController {
         //Retrieve JobRoleId & add it to Subject entity as a foreign key
         if(Subject.getGrade().getId()!=null){
             Grade existingGrade = gradeServiceService.findGradeById(Subject.getGrade().getId());
-            Subject.setGrade(existingGrade);
+            oldSubject.setGrade(existingGrade);
         }
         //Retrieve JobRoleId & add it to Subject entity as a foreign key
         if(Subject.getSchool().getId()!=null){
@@ -105,7 +105,7 @@ public class SubjectController {
         //Retrieve JobRoleId & add it to Subject entity as a foreign key
         if(Subject.getEmployee().getId()!=null){
             Employee existingEmployee = empployeeService.findEmployeeById(Subject.getEmployee().getId());
-            Subject.setEmployee(existingEmployee);
+            oldSubject.setEmployee(existingEmployee);
         }
 
 //Check if team ID is not null if true retrieve team by team id & add it as a foreign key to Subject
