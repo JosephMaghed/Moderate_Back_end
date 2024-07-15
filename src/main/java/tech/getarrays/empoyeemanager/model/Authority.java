@@ -22,6 +22,9 @@ public class Authority implements Serializable {
     private Employee employee;
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    JobRole jobRole;
+
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     School school;
 
 }

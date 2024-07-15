@@ -35,6 +35,8 @@ public class Student {
 
     private Grade grade;
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @JoinColumn(name = "SectionId")  // Name of the foreign key column
 
-    private Section Section;
+
+    private Section section;
 }

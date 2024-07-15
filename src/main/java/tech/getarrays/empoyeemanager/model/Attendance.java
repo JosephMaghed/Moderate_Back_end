@@ -29,16 +29,16 @@ public class Attendance implements Serializable {
     School school;
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "subjectId")  // Name of the foreign key column
+    @JoinColumn(name = "SubjectId")  // Name of the foreign key column
 
     Subject subject;
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "sectionId")  // Name of the foreign key column
+    @JoinColumn(name = "SectionId")  // Name of the foreign key column
 
     Section section;
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "studentId")  // Name of the foreign key column
+    @JoinColumn(name = "StudentId")  // Name of the foreign key column
 
     Student student;
 
