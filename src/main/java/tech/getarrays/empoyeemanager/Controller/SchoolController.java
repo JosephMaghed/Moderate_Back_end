@@ -13,7 +13,7 @@ import java.util.List;
 public class SchoolController {
     //Initialise & define service files
 
-    public SchoolController(SchoolService schoolService, StudentService studentService, EmployeeService employeeService, SectionService sectionService, GradeService gradeService, SubjectService subjectService, JobRoleService jobRoleService) {
+    public SchoolController(SchoolService schoolService, StudentService studentService, EmployeeService employeeService, SectionService sectionService, GradeService gradeService, SubjectService subjectService, JobRoleService jobRoleService, AuthorityService authorityService) {
         this.schoolService = schoolService;
         this.studentService = studentService;
         this.employeeService = employeeService;
@@ -21,6 +21,7 @@ public class SchoolController {
         this.gradeService = gradeService;
         this.subjectService = subjectService;
         this.jobRoleService = jobRoleService;
+        this.authorityService = authorityService;
     }
     private final SchoolService schoolService;
     private final StudentService studentService;
@@ -33,6 +34,8 @@ public class SchoolController {
 
     private final SubjectService subjectService;
     private final JobRoleService jobRoleService;
+    private final AuthorityService authorityService;
+
 
 
 
@@ -59,6 +62,11 @@ public class SchoolController {
     public ResponseEntity<List<JobRole>> getAllJobRolesBySchoolId(@PathVariable("id")Long id){
         List<JobRole> jobRoles = jobRoleService.findAllJobRolesBySchoolId(id);
         return new ResponseEntity<>(jobRoles,HttpStatus.OK);
+    }
+    @GetMapping("/authority/{id}")
+    public ResponseEntity<List<Authority>> getAllAuthoritiesBySchoolId(@PathVariable("id")Long id){
+        List<Authority> subjects = authorityService.findAllAuthoritiesBySchoolID( id);
+        return new ResponseEntity<>(subjects,HttpStatus.OK);
     }
     @GetMapping("/students/{id}")
     public ResponseEntity<List<Student>> getAllStudents(@PathVariable("id")Long id){

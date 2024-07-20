@@ -3,12 +3,8 @@ package tech.getarrays.empoyeemanager.Controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.getarrays.empoyeemanager.model.Employee;
-import tech.getarrays.empoyeemanager.model.JobRole;
-import tech.getarrays.empoyeemanager.model.School;
-import tech.getarrays.empoyeemanager.service.EmployeeService;
-import tech.getarrays.empoyeemanager.service.JobRoleService;
-import tech.getarrays.empoyeemanager.service.SchoolService;
+import tech.getarrays.empoyeemanager.model.*;
+import tech.getarrays.empoyeemanager.service.*;
 
 import java.util.List;
 
@@ -18,16 +14,22 @@ public class EmployeeController {
     //Initialise & define service files
 
     //Constructor
-    public EmployeeController(JobRoleService jobRoleService, EmployeeService employeeService, SchoolService schoolService) {
+    public EmployeeController(JobRoleService jobRoleService, EmployeeService employeeService, SchoolService schoolService, SubjectService subjectService, AuthorityService authorityService) {
         this.jobRoleService = jobRoleService;
         this.employeeService = employeeService;
         this.schoolService = schoolService;
+        this.subjectService = subjectService;
+        this.authorityService = authorityService;
     }
 
     private final JobRoleService jobRoleService;
 
     private final EmployeeService employeeService;
     private final SchoolService schoolService;
+    private final SubjectService subjectService;
+    private final AuthorityService authorityService;
+
+
 
     //Get all employee data
 @GetMapping("/all")
@@ -35,6 +37,18 @@ public class EmployeeController {
     //Retrieve all employees
     List<Employee> employees=employeeService.findAllEmployees();
     return new ResponseEntity<>(employees, HttpStatus.OK);}
+
+    @GetMapping("/subjects/{id}")
+    public ResponseEntity<List<Subject>> getAllSubjectsByGradeId(@PathVariable("id")Long id){
+        List<Subject> subjects = subjectService.findAllSubjectsByEmployeeId(id);
+        return new ResponseEntity<>(subjects,HttpStatus.OK);
+    }
+    @GetMapping("/authority/{id}")
+    public ResponseEntity<List<Authority>> getAllAuthoritiesByGradeId(@PathVariable("id")Long id){
+        List<Authority> subjects = authorityService.findAllAuthoritiesByEmployeeID(id);
+        return new ResponseEntity<>(subjects,HttpStatus.OK);
+    }
+
 
     //Get employee by id
     @GetMapping("/find/{id}")

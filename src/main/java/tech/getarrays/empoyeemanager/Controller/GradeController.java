@@ -3,10 +3,7 @@ package tech.getarrays.empoyeemanager.Controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.getarrays.empoyeemanager.model.Grade;
-import tech.getarrays.empoyeemanager.model.School;
-import tech.getarrays.empoyeemanager.model.Section;
-import tech.getarrays.empoyeemanager.model.Student;
+import tech.getarrays.empoyeemanager.model.*;
 import tech.getarrays.empoyeemanager.service.*;
 import tech.getarrays.empoyeemanager.service.GradeService;
 
@@ -18,11 +15,12 @@ public class GradeController {
     //Initialise & define service files
 
     //Constructor
-    public GradeController(SchoolService schoolService, GradeService gradeService, SectionService sectionService, StudentService studentService) {
+    public GradeController(SchoolService schoolService, GradeService gradeService, SectionService sectionService, StudentService studentService, SubjectService subjectService) {
         this.schoolService = schoolService;
         this.GradeService = gradeService;
         this.sectionService = sectionService;
         this.studentService = studentService;
+        this.subjectService = subjectService;
     }
 
 
@@ -30,6 +28,8 @@ public class GradeController {
     private final SchoolService schoolService;
     private final SectionService sectionService;
     private final StudentService studentService;
+    private final SubjectService subjectService;
+
 
 
 
@@ -52,6 +52,11 @@ public class GradeController {
     public ResponseEntity<List<Student>> getAllStudentsByGradeId(@PathVariable("id")Long id){
         List<Student> students = studentService.findAllStudentsByGradeId(id);
         return new ResponseEntity<>(students,HttpStatus.OK);
+    }
+    @GetMapping("/subjects/{id}")
+    public ResponseEntity<List<Subject>> getAllSubjectsByGradeId(@PathVariable("id")Long id){
+        List<Subject> subjects = subjectService.findAllSubjectsByGradeId(id);
+        return new ResponseEntity<>(subjects,HttpStatus.OK);
     }
 
     //Get Grade by id

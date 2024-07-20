@@ -25,6 +25,9 @@ public class ScoreService {
     public List<Score> findAllAuthorities(){
         return ScoreRepoRepo.findAll();
     }
+    public List<Score> getScoresByStudentIdAndSubjectId(Long studentId, Long subjectId) {
+        return ScoreRepoRepo.findScoresByStudentIdAndSubjectId(studentId, subjectId);
+    }
 
     public Score findScoreById(Long id){
         return ScoreRepoRepo.findById(id).orElse(null);}

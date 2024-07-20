@@ -14,7 +14,7 @@ public class Subject {  @Id //Primary Key
         generator="employee_sequence")//How to generate value
     private Long id;
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "GradeId")  // Name of the foreign key column
+    @JoinColumn(name = "GradeId ")  // Name of the foreign key column
 
     private Grade grade;
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)

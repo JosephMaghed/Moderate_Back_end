@@ -3,10 +3,7 @@ package tech.getarrays.empoyeemanager.Controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.getarrays.empoyeemanager.model.Grade;
-import tech.getarrays.empoyeemanager.model.Section;
-import tech.getarrays.empoyeemanager.model.Student;
-import tech.getarrays.empoyeemanager.model.School;
+import tech.getarrays.empoyeemanager.model.*;
 import tech.getarrays.empoyeemanager.service.*;
 
 import java.util.List;
@@ -17,12 +14,15 @@ public class StudentController {
     //Initialise & define service files
 
     //Constructor
-    public StudentController(JobRoleService jobRoleService, StudentService StudentService, SchoolService schoolService, GradeService gradeServiceService, SectionService sectionService) {
+    public StudentController(JobRoleService jobRoleService, StudentService StudentService, SchoolService schoolService, GradeService gradeServiceService, SectionService sectionService, ScoreService scoreService, AttendanceService attendanceService, SubjectService subjectService) {
         this.jobRoleService = jobRoleService;
         this.StudentService = StudentService;
         this.schoolService = schoolService;
         this.gradeServiceService = gradeServiceService;
         this.sectionService = sectionService;
+        this.scoreService = scoreService;
+        this.attendanceService = attendanceService;
+        this.subjectService = subjectService;
     }
 
     private final JobRoleService jobRoleService;
@@ -32,6 +32,12 @@ public class StudentController {
 
     private final GradeService gradeServiceService;
     private final SectionService sectionService;
+    private final ScoreService scoreService;
+    private final AttendanceService attendanceService;
+    private final SubjectService subjectService;
+
+
+
 
 
 
@@ -41,6 +47,20 @@ public class StudentController {
     //Retrieve all Students
     List<Student> Students=StudentService.findAllStudents();
     return new ResponseEntity<>(Students, HttpStatus.OK);}
+    @GetMapping("/scores/{studentId}/{subjectId}")
+    public List<Score> getScoresByStudentAndSubject(@PathVariable Long studentId, @PathVariable Long subjectId) {
+        return scoreService.getScoresByStudentIdAndSubjectId(studentId, subjectId);
+    }
+    @GetMapping("/attendance/{studentId}/{subjectId}")
+    public List<Attendance> getAttendanceByStudentAndSubject(@PathVariable Long studentId, @PathVariable Long subjectId) {
+        return attendanceService.getAttendanceByStudentIdAndSubjectId(studentId, subjectId);
+    }
+    @GetMapping("/sections/{id}")
+    public ResponseEntity<List<Subject>> getAllSubjectsByStudentId(@PathVariable("id")Long id){
+    Grade existingGrade=gradeServiceService.findGradeById(StudentService.findStudentById(id).getGrade().getId());
+        List<Subject> subjects = subjectService.findAllSubjectsByGradeId(id);
+        return new ResponseEntity<>(subjects,HttpStatus.OK);
+    }
 
     //Get Student by id
     @GetMapping("/find/{id}")

@@ -36,4 +36,8 @@ public class AttendanceService {
     public void deleteAttendance(Long id){
         attendanceRepoRepo.deleteById(id);
     }
+
+    public List<Attendance> getAttendanceByStudentIdAndSubjectId(Long studentId, Long subjectId) {
+        return attendanceRepoRepo.findAttendanceByStudentIdAndSubjectId(studentId, subjectId);
+    }
 }

@@ -29,6 +29,13 @@ public class SubjectService {
     public List<Subject> findAllSubjectsBySchoolId(Long Id){
         return SubjectRepo.findSubjectBySchoolId(Id);
     }
+    public List<Subject> findAllSubjectsByGradeId(Long Id){
+        return SubjectRepo.findSubjectByGradeId(Id);
+    }
+    public List<Subject> findAllSubjectsByEmployeeId(Long Id){
+        return SubjectRepo.findSubjectByEmployeeId(Id);
+    }
+
 
 
     public Subject updateSubject(Subject Subject){return SubjectRepo.save(Subject);}
