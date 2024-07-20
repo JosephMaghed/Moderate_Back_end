@@ -26,6 +26,11 @@ public class GradeService {
         return GradeRepo.findAll();
     }
 
+    public List<Grade> findAllGradesBySchoolId(Long id){
+        return GradeRepo.findGradeBySchoolId(id);
+    }
+
+
     public Grade updateGrade(Grade Grade){return GradeRepo.save(Grade);}
 
     public Grade findGradeById(Long id)

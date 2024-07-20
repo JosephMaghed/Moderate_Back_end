@@ -25,6 +25,14 @@ public class SectionService {
     public List<Section> findAllSections(){
         return SectionRepo.findAll();
     }
+    public List<Section> findAllSectionsBySchoolId(Long Id){
+        return SectionRepo.findSectionBySchoolId(Id);
+    }
+    public List<Section> findAllSectionsByGradeId(Long Id){
+        return SectionRepo.findAuthorityByGradeId( Id);
+    }
+
+
 
     public Section updateSection(Section Section){return SectionRepo.save(Section);}
 

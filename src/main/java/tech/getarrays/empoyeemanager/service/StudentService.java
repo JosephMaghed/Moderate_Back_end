@@ -25,6 +25,15 @@ public class StudentService {
     public List<Student> findAllStudents(){
         return StudentRepo.findAll();
     }
+    public List<Student> findAllStudentsBySchoolId(Long SchoolId){return StudentRepo.findStudentBySchoolId(SchoolId);}
+    public List<Student> findAllStudentsByGradeId(Long GradeId){
+        return StudentRepo.findStudentByGradeId(GradeId);
+    }
+    public List<Student> findAllStudentsBySectionId(Long GradeId){
+        return StudentRepo.findStudentBySectionId(GradeId);
+    }
+
+
 
     public Student updateStudent(Student Student){return StudentRepo.save(Student);}
 

@@ -3,6 +3,7 @@ package tech.getarrays.empoyeemanager.Controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.getarrays.empoyeemanager.model.Employee;
 import tech.getarrays.empoyeemanager.model.JobRole;
 import tech.getarrays.empoyeemanager.model.School;
 import tech.getarrays.empoyeemanager.service.AuthorityService;
@@ -17,12 +18,16 @@ import java.util.List;
 public class JobRoleController {
     //Initialise & define service files
 
-    public JobRoleController (AuthorityService authorityService, JobRoleService jobRoleService, EmployeeService employeeService, SchoolService schoolService) {
+    public JobRoleController (AuthorityService authorityService, JobRoleService jobRoleService, EmployeeService employeeService, SchoolService schoolService,EmployeeService employeeService1) {
         this.jobRoleService = jobRoleService;
         this.schoolService = schoolService;
+        this.employeeService = employeeService1;
+
     }
     private final JobRoleService jobRoleService;
     private final SchoolService schoolService;
+    private final EmployeeService employeeService;
+
 
 
 
@@ -47,6 +52,12 @@ public class JobRoleController {
     public ResponseEntity<List<JobRole>> getAllJobRoles(){
         List<JobRole> jobRoles = jobRoleService.findAllJobRoles();
         return new ResponseEntity<>(jobRoles,HttpStatus.OK);
+    }
+
+    @GetMapping("/subjects/{id}")
+    public ResponseEntity<List<Employee>> getAllEmployeesByJobRoleId(@PathVariable("id")Long id){
+        List<Employee> employees = employeeService.findAllEmployeesByJobRoleId(id);
+        return new ResponseEntity<>(employees,HttpStatus.OK);
     }
     @GetMapping("/find/{id}")
     public ResponseEntity <JobRole> getJobRoleById(@PathVariable("id")Long id){

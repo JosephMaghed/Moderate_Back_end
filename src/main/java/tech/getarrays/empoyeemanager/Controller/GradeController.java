@@ -5,9 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.getarrays.empoyeemanager.model.Grade;
 import tech.getarrays.empoyeemanager.model.School;
+import tech.getarrays.empoyeemanager.model.Section;
+import tech.getarrays.empoyeemanager.model.Student;
+import tech.getarrays.empoyeemanager.service.*;
 import tech.getarrays.empoyeemanager.service.GradeService;
-import tech.getarrays.empoyeemanager.service.GradeService;
-import tech.getarrays.empoyeemanager.service.SchoolService;
 
 import java.util.List;
 
@@ -17,14 +18,21 @@ public class GradeController {
     //Initialise & define service files
 
     //Constructor
-    public GradeController( SchoolService schoolService, GradeService gradeService) {
+    public GradeController(SchoolService schoolService, GradeService gradeService, SectionService sectionService, StudentService studentService) {
         this.schoolService = schoolService;
         this.GradeService = gradeService;
+        this.sectionService = sectionService;
+        this.studentService = studentService;
     }
 
 
     private final GradeService GradeService;
     private final SchoolService schoolService;
+    private final SectionService sectionService;
+    private final StudentService studentService;
+
+
+
 
 
 
@@ -34,6 +42,17 @@ public class GradeController {
     //Retrieve all Grades
     List<Grade> Grades=GradeService.findAllGrades();
     return new ResponseEntity<>(Grades, HttpStatus.OK);}
+
+    @GetMapping("/sections/{id}")
+    public ResponseEntity<List<Section>> getAllSectionsByGradeId(@PathVariable("id")Long id){
+        List<Section> sections = sectionService.findAllSectionsByGradeId(id);
+        return new ResponseEntity<>(sections,HttpStatus.OK);
+    }
+    @GetMapping("/students/{id}")
+    public ResponseEntity<List<Student>> getAllStudentsByGradeId(@PathVariable("id")Long id){
+        List<Student> students = studentService.findAllStudentsByGradeId(id);
+        return new ResponseEntity<>(students,HttpStatus.OK);
+    }
 
     //Get Grade by id
     @GetMapping("/find/{id}")

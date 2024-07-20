@@ -9,4 +9,6 @@ import java.util.List;
 public interface GradeRepo extends JpaRepository<Grade,Long> {
     List<Grade> findGradeBySchoolId(Long schoolId);
 
+
+
 }

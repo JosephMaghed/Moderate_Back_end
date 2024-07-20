@@ -25,6 +25,10 @@ public class JobRoleService {
     public List<JobRole> findAllJobRoles(){
         return jobRoleRepo.findAll();
     }
+    public List<JobRole> findAllJobRolesBySchoolId(Long id){
+        return jobRoleRepo.findJobRoleBySchoolId(id);
+    }
+
 
     public JobRole findJobRoleById(Long id){
         return jobRoleRepo.findById(id).orElse(null);}

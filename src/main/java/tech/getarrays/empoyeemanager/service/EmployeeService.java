@@ -30,6 +30,16 @@ public class EmployeeService {
         return employeeRepo.findAll();
     }
 
+    public List<Employee> findAllEmployeesByJobRoleId(Long Id){
+        return employeeRepo.findEmployeeByJobRoleId(Id);
+    }
+
+
+    public List<Employee> findAllEmployeesBySchoolId(Long SchoolId){
+        return employeeRepo.findEmployeeBySchoolId(SchoolId);
+    }
+
+
     public Employee updateEmployee(Employee employee){return employeeRepo.save(employee);}
 
     public Employee findEmployeeById(Long id)

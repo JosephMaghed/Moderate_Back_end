@@ -3,10 +3,7 @@ package tech.getarrays.empoyeemanager.Controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.getarrays.empoyeemanager.model.Grade;
-import tech.getarrays.empoyeemanager.model.Section;
-import tech.getarrays.empoyeemanager.model.Employee;
-import tech.getarrays.empoyeemanager.model.School;
+import tech.getarrays.empoyeemanager.model.*;
 import tech.getarrays.empoyeemanager.service.*;
 import tech.getarrays.empoyeemanager.service.SectionService;
 
@@ -16,15 +13,17 @@ import java.util.List;
 @RequestMapping("/section")
 public class SectionController {
     //Initialise & define service files
-    public SectionController(SectionService SectionService, GradeService gradeService, EmployeeService employeeService, SchoolService schoolService, SectionService sectionService) {
+    public SectionController(SectionService SectionService, GradeService gradeService, EmployeeService employeeService, SchoolService schoolService, StudentService studentService, SectionService sectionService) {
         this.gradeService = gradeService;
         this.employeeService = employeeService;
         this.schoolService = schoolService;
+        this.studentService = studentService;
         this.sectionService = sectionService;
     }
     private final GradeService gradeService;
     private final EmployeeService employeeService;
     private final SchoolService schoolService;
+    private final StudentService studentService;
 
     private final SectionService sectionService;
 
@@ -58,6 +57,11 @@ public class SectionController {
     public ResponseEntity<List<Section>> getAllAuthorities(){
         List<Section> authorities = sectionService.findAllSections();
         return new ResponseEntity<>(authorities,HttpStatus.OK);
+    }
+    @GetMapping("/students/{id}")
+    public ResponseEntity<List<Student>> getAllStudentsByClassId(@PathVariable("id")Long id){
+        List<Student> Sections = studentService.findAllStudentsBySectionId(id);
+        return new ResponseEntity<>(Sections,HttpStatus.OK);
     }
     @GetMapping("/find/{id}")
     public ResponseEntity <Section> getSectionById(@PathVariable("id")Long id){

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SectionRepo extends JpaRepository<Section,Long> {
     List<Section> findAuthorityByGradeId(Long gradeId);
-    List<JobRole> findAuthorityBySchoolId(Long schoolId);
+    List<Section> findSectionBySchoolId(Long schoolId);
 
 
 }
