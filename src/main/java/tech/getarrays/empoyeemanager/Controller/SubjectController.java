@@ -17,17 +17,15 @@ public class SubjectController {
     //Initialise & define service files
 
     //Constructor
-    public SubjectController(JobRoleService jobRoleService, EmployeeService empployeeService, SubjectService subjectService, SchoolService schoolService, GradeService gradeServiceService) {
-        this.jobRoleService = jobRoleService;
-        this.empployeeService = empployeeService;
+    public SubjectController( EmployeeService employeeService, SubjectService subjectService, SchoolService schoolService, GradeService gradeServiceService) {
+        this.employeeService = employeeService;
         this.subjectService = subjectService;
         this.schoolService = schoolService;
         this.gradeServiceService = gradeServiceService;
     }
 
-    private final JobRoleService jobRoleService;
 
-    private final EmployeeService empployeeService;
+    private final EmployeeService employeeService;
 
 
     private final SubjectService subjectService;
@@ -62,7 +60,7 @@ public class SubjectController {
         }
 
         if(Subject.getEmployee()!=null&&Subject.getEmployee().getId()!=null){
-            Employee existingEmployee = empployeeService.findEmployeeById(Subject.getGrade().getId());
+            Employee existingEmployee = employeeService.findEmployeeById(Subject.getEmployee().getId());
             Subject.setEmployee(existingEmployee);
         }
         //Retrieve JobRoleId & add it to Subject entity as a foreign key
@@ -80,7 +78,7 @@ public class SubjectController {
 
     }
 
-    //update an Subject by id
+    //update a Subject by id
     @PutMapping("/update/{id}")
 
     public ResponseEntity<Subject> updateSubject(@RequestBody Subject Subject,@PathVariable("id")Long id){
@@ -104,7 +102,7 @@ public class SubjectController {
         }
         //Retrieve JobRoleId & add it to Subject entity as a foreign key
         if(Subject.getEmployee().getId()!=null){
-            Employee existingEmployee = empployeeService.findEmployeeById(Subject.getEmployee().getId());
+            Employee existingEmployee = employeeService.findEmployeeById(Subject.getEmployee().getId());
             oldSubject.setEmployee(existingEmployee);
         }
 

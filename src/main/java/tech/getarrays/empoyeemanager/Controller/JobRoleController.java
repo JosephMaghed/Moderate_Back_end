@@ -18,7 +18,7 @@ import java.util.List;
 public class JobRoleController {
     //Initialise & define service files
 
-    public JobRoleController (AuthorityService authorityService, JobRoleService jobRoleService, EmployeeService employeeService, SchoolService schoolService,EmployeeService employeeService1) {
+    public JobRoleController ( JobRoleService jobRoleService,  SchoolService schoolService,EmployeeService employeeService1) {
         this.jobRoleService = jobRoleService;
         this.schoolService = schoolService;
         this.employeeService = employeeService1;

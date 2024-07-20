@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/attendance")
 public class AttendanceController {
     //Initialise & define service files
-    public AttendanceController(AttendanceService AttendanceService, AttendanceService attendanceService, StudentService studentService, SubjectService subjectService, SchoolService schoolService) {
+    public AttendanceController(AttendanceService AttendanceService,  StudentService studentService, SubjectService subjectService, SchoolService schoolService) {
         this.AttendanceService = AttendanceService;
         this.studentService = studentService;
         this.subjectService = subjectService;

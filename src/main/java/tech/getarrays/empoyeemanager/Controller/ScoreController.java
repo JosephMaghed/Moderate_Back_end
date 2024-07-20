@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/score")
 public class ScoreController {
     //Initialise & define service files
-    public ScoreController(ScoreService scoreService, ScoreService ScoreService, StudentService studentService, SubjectService subjectService, SectionService sectionService, SchoolService schoolService) {
+    public ScoreController( ScoreService ScoreService, StudentService studentService, SubjectService subjectService, SectionService sectionService, SchoolService schoolService) {
         this.ScoreService = ScoreService;
         this.studentService = studentService;
         this.subjectService = subjectService;
