@@ -3,6 +3,8 @@ package tech.getarrays.empoyeemanager.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.getarrays.empoyeemanager.model.Student;
+import tech.getarrays.empoyeemanager.model.StudentAttendanceDTO;
+import tech.getarrays.empoyeemanager.model.StudentScoreDTO;
 import tech.getarrays.empoyeemanager.repo.StudentRepo;
 
 import java.util.List;
@@ -32,6 +34,14 @@ public class StudentService {
     public List<Student> findAllStudentsBySectionId(Long GradeId){
         return StudentRepo.findStudentBySectionId(GradeId);
     }
+
+    public List<StudentAttendanceDTO> findAllStudentsAttendance(Long StudentId){
+        return StudentRepo.findStudentAttendanceById(StudentId);
+    }
+    public List<StudentScoreDTO> findAllStudentsScores(Long StudentId){
+        return StudentRepo.findStudentScoreById(StudentId);
+    }
+
 
 
 

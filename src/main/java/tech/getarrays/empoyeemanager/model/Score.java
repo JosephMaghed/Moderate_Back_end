@@ -1,6 +1,7 @@
 package tech.getarrays.empoyeemanager.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,6 +20,8 @@ public class Score implements Serializable {  @Id //Primary Key
 
     private Date date;
     private  Long studentScore;
+    @Positive(message = "fullMark must be greater than zero")
+
     private  Long fullMark;
     private  Long ScoreWeightPercentage;
     private  String name;

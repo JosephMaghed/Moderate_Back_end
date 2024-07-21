@@ -63,7 +63,7 @@ public class SchoolController {
         List<JobRole> jobRoles = jobRoleService.findAllJobRolesBySchoolId(id);
         return new ResponseEntity<>(jobRoles,HttpStatus.OK);
     }
-    @GetMapping("/authority/{id}")
+    @GetMapping("/authorities/{id}")
     public ResponseEntity<List<Authority>> getAllAuthoritiesBySchoolId(@PathVariable("id")Long id){
         List<Authority> subjects = authorityService.findAllAuthoritiesBySchoolID( id);
         return new ResponseEntity<>(subjects,HttpStatus.OK);

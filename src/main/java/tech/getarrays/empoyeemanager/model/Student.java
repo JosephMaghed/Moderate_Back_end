@@ -17,15 +17,15 @@ public class Student {
             generator="employee_sequence")//How to generate value
     private Long id;
 
-    @NotBlank(message = "Name can not be empty")
+   // @NotBlank(message = "Name can not be empty")
     private String name;
 
-    @NotBlank(message = "Email must not be empty")
-    @Email(message = "Email must e in the correct format")
+   // @NotBlank(message = "Email must not be empty")
+   // @Email(message = "Email must e in the correct format")
     private String email;
 
-    @NotBlank(message = "Password cannot be blank ")
-    @Size(min = 8, message = "Please enter a password of min 8 characters ")
+  //  @NotBlank(message = "Password cannot be blank ")
+    //@Size(min = 8, message = "Please enter a password of min 8 characters ")
     private String password;
 
 
