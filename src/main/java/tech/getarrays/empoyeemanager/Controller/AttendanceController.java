@@ -20,7 +20,6 @@ public class AttendanceController {
         this.schoolService = schoolService;
     }
     private final AttendanceService AttendanceService;
-
     private final StudentService studentService;
     private final SubjectService subjectService;
 
