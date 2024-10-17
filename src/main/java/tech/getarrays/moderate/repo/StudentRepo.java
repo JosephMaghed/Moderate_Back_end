@@ -10,6 +10,8 @@ import tech.getarrays.moderate.model.StudentScoreDTO;
 import java.util.List;
 
 public interface StudentRepo extends JpaRepository<Student,Long> {
+    Student findByUsername(String username);
+
     List<Student> findStudentBySchoolId(Long schoolId);
     List<Student> findStudentBySectionId(Long sectionId);
     List<Student> findStudentByGradeId(Long sectionId);

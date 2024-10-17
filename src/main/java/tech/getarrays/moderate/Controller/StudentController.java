@@ -110,7 +110,7 @@ public class StudentController {
 
     if(student.getName()!=null){oldStudent.setName(student.getName());}
 
-    if(student.getEmail()!=null){oldStudent.setEmail(student.getEmail());}
+    if(student.getUsername()!=null){oldStudent.setUsername(student.getUsername());}
 
     if(student.getPassword()!=null){oldStudent.setPassword(student.getPassword());}
 

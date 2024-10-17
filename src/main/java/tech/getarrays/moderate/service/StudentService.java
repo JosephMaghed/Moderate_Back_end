@@ -1,6 +1,10 @@
 package tech.getarrays.moderate.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import tech.getarrays.moderate.model.Student;
 import tech.getarrays.moderate.model.StudentAttendanceDTO;
@@ -15,11 +19,31 @@ public class StudentService {
     private final StudentRepo StudentRepo;
     //Constructor
     @Autowired
+    AuthenticationManager authManager;
+
+    @Autowired
+    private JWTService jwtService;
+    @Autowired
     public StudentService(StudentRepo StudentRepo) {
         this.StudentRepo = StudentRepo;
     }
 
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
+    public Student register(Student user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        StudentRepo.save(user);
+        return user;
+    }
+
+    public String verify(Student user) {
+        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        if (authentication.isAuthenticated()) {
+            return jwtService.generateToken(user.getUsername());
+        } else {
+            return "fail";
+        }
+    }
     public Student addStudent(Student Student){
         return  StudentRepo.save(Student);
     }
