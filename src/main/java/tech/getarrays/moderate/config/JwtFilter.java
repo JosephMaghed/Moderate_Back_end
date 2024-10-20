@@ -1,7 +1,6 @@
 package tech.getarrays.moderate.config;
 
-import com.telusko.part29springsecex.service.JWTService;
-import com.telusko.part29springsecex.service.MyUserDetailsService;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import tech.getarrays.moderate.model.MyUserDetailsService;
+import tech.getarrays.moderate.service.JWTService;
 
 import java.io.IOException;
 @Component
@@ -28,6 +29,18 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 //  Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraWxsIiwiaWF0IjoxNzIzMTgzNzExLCJleHAiOjE3MjMxODM4MTl9.5nf7dRzKRiuGurN2B9dHh_M5xiu73ZzWPr6rbhOTTHs
+        System.out.println("jwt called");
+        String requestURI = request.getRequestURI();  // Get the requested URI
+
+        // Skip JWT validation for the login and register endpoints
+        if (requestURI.contains("student/login") || requestURI.contains("/student/register")) {
+            System.out.println("url skipped");
+            filterChain.doFilter(request, response);  // Allow the request to proceed without JWT validation
+            return;  // Exit the filter
+        }else {
+            System.out.println("url not skipped");
+
+        }
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;

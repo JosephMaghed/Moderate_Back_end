@@ -37,8 +37,18 @@ public class StudentController {
     private final SubjectService subjectService;
 
 
+    @PostMapping("/register")
+    ResponseEntity<String> register(@RequestBody Student student) {
+         StudentService.register(student);
+        return ResponseEntity.ok("Student registered successfully");
 
+    }
 
+    @PostMapping("/login")
+    public String login(@RequestBody Student user) {
+
+        return StudentService.verify(user);
+    }
 
 
     //Get all Student data
