@@ -23,7 +23,7 @@ public class Employee implements Serializable {  @Id //Primary Key
 
     @NotBlank(message = "Email must not be empty")
     @Email(message = "Email must e in the correct format")
-    private String email;
+    private String username;
 
 
 
@@ -31,11 +31,14 @@ public class Employee implements Serializable {  @Id //Primary Key
     @Size(min = 10, message = "Please enter a valid phone number")
     private String phone;
 
+    @NotBlank(message = "Please enter your password ")
+    @Size(min = 8, message = "Please enter a valid password")
+    private String password;
+
     private String imageUrl;
 
 
-    @Column(nullable = true,updatable = true)
-    private String employeeCode;
+//    private String employeeCode;
 
     //Connect to Job table
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)

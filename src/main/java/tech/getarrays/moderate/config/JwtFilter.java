@@ -33,7 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();  // Get the requested URI
 
         // Skip JWT validation for the login and register endpoints
-        if (requestURI.contains("student/login") || requestURI.contains("/student/register")) {
+        if (requestURI.contains("student/login") || requestURI.contains("/student/register")||requestURI.contains("/employee/login") || requestURI.contains("/employee/register")) {
             System.out.println("url skipped");
             filterChain.doFilter(request, response);  // Allow the request to proceed without JWT validation
             return;  // Exit the filter

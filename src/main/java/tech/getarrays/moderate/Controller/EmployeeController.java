@@ -29,7 +29,18 @@ public class EmployeeController {
     private final SubjectService subjectService;
     private final AuthorityService authorityService;
 
+    @PostMapping("/register")
+    ResponseEntity<String> register(@RequestBody Employee employee) {
+        employeeService.register(employee);
+        return ResponseEntity.ok("Employee registered successfully");
 
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody Employee employee) {
+
+        return employeeService.verify(employee);
+    }
 
     //Get all employee data
 @GetMapping("/all")
@@ -93,7 +104,7 @@ public class EmployeeController {
 
     if(employee.getName()!=null){oldEmployee.setName(employee.getName());}
 
-    if(employee.getEmail()!=null){oldEmployee.setEmail(employee.getEmail());}
+    if(employee.getUsername()!=null){oldEmployee.setUsername(employee.getUsername());}
 
     if(employee.getPhone()!=null){oldEmployee.setPhone(employee.getPhone());}
 
