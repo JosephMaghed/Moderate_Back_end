@@ -2,6 +2,7 @@ package tech.getarrays.moderate.Controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tech.getarrays.moderate.model.*;
 import tech.getarrays.moderate.service.*;
@@ -67,6 +68,8 @@ public class EmployeeController {
     //Retrieve employee by ID
         Employee employee=employeeService.findEmployeeById(id);
         return new ResponseEntity<>(employee, HttpStatus.OK);}
+
+    @PreAuthorize("hasAuthority('ModifyEmployee')")
 
     //Add new employee
     @PostMapping("/add")

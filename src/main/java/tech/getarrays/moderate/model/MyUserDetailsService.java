@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import tech.getarrays.moderate.repo.EmployeeRepo;
 import tech.getarrays.moderate.repo.StudentRepo;
+import tech.getarrays.moderate.service.AuthorityService;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
@@ -17,6 +18,8 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private EmployeeRepo employeeRepo;
+    @Autowired
+    private AuthorityService authorityService;
 
 
     @Override
@@ -29,7 +32,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     }
         else if(employeeUser != null) {
-            return new EmployeePrincipal(employeeUser);
+            return new EmployeePrincipal(employeeUser,authorityService);
 
 
         }

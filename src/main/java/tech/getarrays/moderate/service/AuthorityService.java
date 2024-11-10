@@ -27,9 +27,20 @@ public class AuthorityService {
     public List<Authority> findAllAuthoritiesBySchoolID(Long id){
         return authorityRepo.findAuthorityBySchoolId(id);
     }
+    public List<String> findAllAuthoritiesNameByEmployeeID(Long id){
+        return authorityRepo.findAuthorityNameByEmployeeId(id);
+    }
+    public List<String> findAllAuthoritiesNameByJobRoleID(Long id){
+        return authorityRepo.findAuthorityNamesByJobRoleId(id);
+    }
+
     public List<Authority> findAllAuthoritiesByEmployeeID(Long id){
         return authorityRepo.findAuthorityByEmployeeId(id);
     }
+    public List<Authority> findAllAuthoritiesByJobRoleID(Long id){
+        return authorityRepo.findAuthorityByJobRoleId(id);
+    }
+
 
     public Authority findAuthorityById(Long id){
         return authorityRepo.findById(id).orElse(null);}
